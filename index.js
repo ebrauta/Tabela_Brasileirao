@@ -12,8 +12,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
+const corsOptions = {
+  "origin": "*",
+  "methods" : "GET",
+  "allowedHeaders": ['Content-Type','Authorization'],
+  "optionSuccessStatus": 204
+}
+
 // Passo 1
-app.get("/", function (req, res) {
+app.get("/", cors(corsOptions),(req, res) => {
   url =
     "https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a";
   request(url, function (error, response, html) {
