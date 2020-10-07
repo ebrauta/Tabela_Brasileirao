@@ -8,19 +8,19 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(cors());
-
 const corsOptions = {
   "origin": "*",
-  "methods" : "GET",
-  "allowedHeaders": ['Content-Type','Authorization'],
-  "optionSuccessStatus": 204
+  "optionSuccessStatus": 200
 }
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors(corsOptions));
+
+
+
 // Passo 1
-app.get("/", cors(corsOptions),(req, res) => {
+app.get("/", (req, res) => {
   url =
     "https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a";
   request(url, function (error, response, html) {
